@@ -10,6 +10,7 @@
 using namespace cocos2d;
 #include "Amok_Jebat.h"
 #include "fireLayer.h"
+#include "GameLayer.h"
 
 
 
@@ -138,34 +139,40 @@ void CKSneaky::addButton(SneakyButtonSkinnedBase *buttonBase,
 int x = 1, y = 1;
 void CKSneaky::update(float dt)
 {
-//    CCPoint velocity = ccpMult(joystick->getVelocity(), 2);
-//    Amok_Jebat *player = fireLayer::shardfireLayer()->player;
-//    int xs = velocity.x;
-//    int ys = velocity.y;
-//    if(xs != 0 && velocity.y != 0)
-//    {
-//        
-//        player->cocos2d::CCNode::setPosition(player->getPositionX() + velocity.x, player->getPositionY());        
+    CCPoint velocity = ccpMult(joystick->getVelocity(), 2);
+    Amok_Jebat *player = GameLayer::sharedGameLayer()->aplayer;
+//    player->release();
+    int xs = velocity.x;
+    int ys = velocity.y;
+    if(xs != 0 )//&& velocity.y != 0)
+    {
+        
+        
+//        b2Body *body = player->amokBody;
+//        body->ApplyForceToCenter(b2Vec2(xs*10,ys*10));
+//        player->cocos2d::CCNode::setPosition(player->getPositionX() + velocity.x, player->getPositionY());
 //        player->dorunning();
 //        
-//        if( xs < 0 )
-//        {
-//            player->turnLeft();
-//        }
-//        if (xs > 0 )
-//        {
-//            player->turnRight();            
-//        }
-//    }
-//    else if (xs == 0 && ys == 0)
-//    {
-//        player->doStanding();
-//    }
-//    else if (ys > 0)
-//    {
-//        player->doJump();
-//    }
-//    
+        if( xs < 0 )
+        {
+            player->amokBody->ApplyForceToCenter(b2Vec2(-10,0));
+            player->turnLeft();
+        }
+        if (xs > 0 )
+        {
+            player->amokBody->ApplyForceToCenter(b2Vec2(10,0));
+            player->turnRight();            
+        }
+    }
+    else if (xs == 0 && ys == 0)
+    {
+        player->doStanding();
+    }
+    else if (ys > 0)
+    {
+        player->doJump();
+    }
+//
 //        
 //    totalTime += dt;
 //    

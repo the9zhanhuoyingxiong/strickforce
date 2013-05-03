@@ -14,6 +14,8 @@
 using namespace cocos2d;
 using namespace CocosDenshion;
 
+GameLayer * bGameLayer = NULL;
+
 #define PTM_RATIO 32
 
 enum {
@@ -72,13 +74,16 @@ CCAffineTransform PhysicsSprite::nodeToParentTransform(void)
 
     return m_tTransform;
 }
+GameLayer * GameLayer::sharedGameLayer()
+{
+    return bGameLayer;
+}
 
 GameLayer::GameLayer()
 {
     setTouchEnabled( true );
     setAccelerometerEnabled( true );
-    
-    
+    bGameLayer = this;
     CCTMXTiledMap *map = CCTMXTiledMap::create("fifth.tmx");
     CCSize mSize = map->getContentSize();
     this->addChild(map,-10,kTagBackground);
@@ -109,21 +114,25 @@ GameLayer::~GameLayer()
 
 void GameLayer::initPlayer()
 {
-    Amok_Jebat *aplayer = Amok_Jebat::create(Amok_stand);
+    aplayer = Amok_Jebat::create(Amok_stand);
     aplayer->retain();
     addChild(aplayer);    
     
     b2BodyDef playerBodyDef;
     playerBodyDef.type = b2_dynamicBody;
     playerBodyDef.position.Set(100.f/PTM_RATIO, 180.f/PTM_RATIO);
+    
 
     b2Body* playerBody = world->CreateBody(&playerBodyDef);
+    
 
     b2PolygonShape playerShape ;
     playerShape.SetAsBox(0.5f  ,0.90f);//pSize.height/12/PTM_RATIO);
     playerBody->CreateFixture(&playerShape,0);
     
+    
     playerBody->SetUserData(aplayer);
+    aplayer->amokBody = playerBody;
     
 }
 
@@ -203,8 +212,7 @@ void GameLayer::addGroundEdge()
         b2EdgeShape groundBox;
         
         CCPoint FromLinePos = ccpAdd(p, mPos);
-        CCPoint ToLinePos = ccpAdd(ccpAdd(p, odd), mPos);
-        
+        CCPoint ToLinePos = ccpAdd(ccpAdd(p, odd), mPos);        
 //        CCLOG("FromLinePos %f %f %f %f",FromLinePos.x,FromLinePos.y,ToLinePos.x,ToLinePos.y);
         
         groundBox.Set(b2Vec2(FromLinePos.x/PTM_RATIO,FromLinePos.y/PTM_RATIO), b2Vec2(ToLinePos.x/PTM_RATIO,ToLinePos.y/PTM_RATIO));

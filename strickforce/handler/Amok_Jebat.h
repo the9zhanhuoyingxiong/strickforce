@@ -11,6 +11,8 @@
 
 #include "cocos2d.h"
 #include "Person.h"
+#include "Box2D.h"
+
 
 typedef enum tag_amok
 {
@@ -33,7 +35,7 @@ typedef enum tag_amok
 
 using namespace cocos2d;
 
-class Amok_Jebat : public Person {
+class Amok_Jebat : public Person{
     
 public:
     
@@ -61,6 +63,8 @@ private:
     CCString *string;
     int flag;
     int stayLineNumber;
+public:
+    b2Body *amokBody;
     
 };
 

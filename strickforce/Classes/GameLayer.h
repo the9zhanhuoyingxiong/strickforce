@@ -34,6 +34,7 @@ public:
     
     // returns a Scene that contains the HelloWorld as the only child
     static cocos2d::CCScene* scene();
+    static GameLayer * sharedGameLayer();
     
     void initPhysics();
     // adds a new sprite at a given coordinate
@@ -47,12 +48,14 @@ public:
     void addGroundEdge();
     void initPlayer();
     
+    
+    Amok_Jebat *aplayer;
+    
 private:
     GLESDebugDraw *m_debugDraw;
-    
-    b2World* world;
+    b2World * world;
     cocos2d::CCTexture2D* m_pSpriteTexture; // weak ref
-    Amok_Jebat *player;
+    
     cocos2d::CCPoint  touchstartPoint;
     cocos2d::CCPoint  touchendPoint;
     
