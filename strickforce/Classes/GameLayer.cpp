@@ -125,10 +125,17 @@ void GameLayer::initPlayer()
 
     b2Body* playerBody = world->CreateBody(&playerBodyDef);
     
+    
 
     b2PolygonShape playerShape ;
-    playerShape.SetAsBox(0.5f  ,0.90f);//pSize.height/12/PTM_RATIO);
-    playerBody->CreateFixture(&playerShape,0);
+    playerShape.SetAsBox(0.5f  ,0.4f);//pSize.height/12/PTM_RATIO);
+    playerBody->SetFixedRotation(true);
+    
+    b2FixtureDef fixtureDef ;
+    fixtureDef.shape = &playerShape;
+    fixtureDef.density = 0.0f;
+    
+    playerBody->CreateFixture(&fixtureDef);
     
     
     playerBody->SetUserData(aplayer);
@@ -187,7 +194,7 @@ void GameLayer::draw()
 
 void GameLayer::addGroundEdge()
 {
-    CCDictionary * lineDic = CCDictionary::createWithContentsOfFile("fifthlinePoints.plist");
+    CCDictionary * lineDic = CCDictionary::createWithContentsOfFile("fivestage471.plist");
     lineDic->retain();
     CCTMXTiledMap *map = (CCTMXTiledMap *)getChildByTag(kTagBackground);
     CCPoint mPos = map->getPosition();
@@ -196,16 +203,21 @@ void GameLayer::addGroundEdge()
     for (int i = 0; i < lineDic->count(); i++)
     {
         CCDictionary *line = (CCDictionary *) lineDic->objectForKey(CCString::createWithFormat("%d",i)->getCString());//9   14
-        float x     = ((CCString *) line->objectForKey("x"))->floatValue();
-        float y     = ((CCString *) line->objectForKey("y"))->floatValue();
+        int x     = ((CCString *) line->objectForKey("x"))->intValue();
+        int y     = ((CCString *) line->objectForKey("y"))->intValue();
+        
+        //CCString *string = CCString::create("-1");
+        CCLOG("%s",((CCString *) line->objectForKey("height"))->getCString());
+        
         float width = ((CCString *) line->objectForKey("width")) ->floatValue();
         float height= ((CCString *) line->objectForKey("height"))->floatValue();
+//        CCLOG(" %d  %d %d %f %f ",i , x, y, width, height);
         
         CCPoint p = CCPoint(x, y);
-        CCPoint odd = CCPoint(width,-height);
+        CCPoint odd = CCPoint(width,-height);   //(100,0);//
 //        ccDrawLine(p, ccpAdd(p, odd));
         b2BodyDef groundBodyDef;
-        groundBodyDef.position.Set(0, 0);
+//        groundBodyDef.position.Set(0, 0);
         
         
         b2Body* groundBody = world->CreateBody(&groundBodyDef);
@@ -276,18 +288,15 @@ void GameLayer::ccTouchesEnded(CCSet*
         CCPoint location = touch->getLocationInView();
         
         location = CCDirector::sharedDirector()->convertToGL(location);
-        CCLOG("%f %f %f %f",getPosition().x,getPosition().y,location.x,location.y);
-        
+                
 //        addNewSpriteAtPosition(ccpSub(location, getPosition()));//ccpSub(location, getPosition())
     }
 }
 
 CCScene* GameLayer::scene()
 {
-    // 'scene' is an autorelease object
     CCScene *scene = CCScene::create();
     
-    // add layer as a child to scene
     CCLayer* layer = new GameLayer();
     scene->addChild(layer);
     layer->release();

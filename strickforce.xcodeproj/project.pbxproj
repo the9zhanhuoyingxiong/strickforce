@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		11237FFA17352F8500CD3E92 /* fivestage.plist in Resources */ = {isa = PBXBuildFile; fileRef = 11237FF917352F8500CD3E92 /* fivestage.plist */; };
+		11237FFE173531FA00CD3E92 /* fivestage471.plist in Resources */ = {isa = PBXBuildFile; fileRef = 11237FFD173531FA00CD3E92 /* fivestage471.plist */; };
 		1133469017311C2A00DB961F /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1133468F17311C2A00DB961F /* QuartzCore.framework */; };
 		1133469217311C2A00DB961F /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1133469117311C2A00DB961F /* OpenGLES.framework */; };
 		1133469417311C2A00DB961F /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1133469317311C2A00DB961F /* OpenAL.framework */; };
@@ -274,6 +276,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		11237FF917352F8500CD3E92 /* fivestage.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = fivestage.plist; sourceTree = "<group>"; };
+		11237FFD173531FA00CD3E92 /* fivestage471.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = fivestage471.plist; sourceTree = "<group>"; };
 		1133468C17311C2A00DB961F /* strickforce.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = strickforce.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1133468F17311C2A00DB961F /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		1133469117311C2A00DB961F /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
@@ -911,7 +915,9 @@
 				113346A917311C2A00DB961F /* Icon-72.png */,
 				113346AB17311C2A00DB961F /* Icon-Small-50.png */,
 				113349DA173128B900DB961F /* Image44frame4.jpg */,
+				11237FFD173531FA00CD3E92 /* fivestage471.plist */,
 				113349DB173128B900DB961F /* fifth.tmx */,
+				11237FF917352F8500CD3E92 /* fivestage.plist */,
 				113349DE173128CC00DB961F /* fifthlinePoints.plist */,
 				113346AD17311C2A00DB961F /* Icon-Small.png */,
 				113346AF17311C2A00DB961F /* Icon-Small@2x.png */,
@@ -2014,6 +2020,8 @@
 				11334A0217312A3600DB961F /* JebatSpriteFrame.png in Resources */,
 				11334A0517312A4200DB961F /* HudLayerSpriteFrame.plist in Resources */,
 				11334A0617312A4200DB961F /* JebatSpriteFrame.plist in Resources */,
+				11237FFA17352F8500CD3E92 /* fivestage.plist in Resources */,
+				11237FFE173531FA00CD3E92 /* fivestage471.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

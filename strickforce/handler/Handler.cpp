@@ -155,12 +155,12 @@ void CKSneaky::update(float dt)
 //        
         if( xs < 0 )
         {
-            player->amokBody->ApplyForceToCenter(b2Vec2(-10,0));
+            player->amokBody->ApplyForceToCenter(b2Vec2(-100,0));
             player->turnLeft();
         }
         if (xs > 0 )
         {
-            player->amokBody->ApplyForceToCenter(b2Vec2(10,0));
+            player->amokBody->ApplyForceToCenter(b2Vec2(100,0));
             player->turnRight();            
         }
     }
@@ -171,6 +171,7 @@ void CKSneaky::update(float dt)
     else if (ys > 0)
     {
         player->doJump();
+        player->amokBody->ApplyForceToCenter(b2Vec2(0,200));
     }
 //
 //        
