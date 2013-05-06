@@ -272,6 +272,7 @@
 		11334A0217312A3600DB961F /* JebatSpriteFrame.png in Resources */ = {isa = PBXBuildFile; fileRef = 11334A0017312A3600DB961F /* JebatSpriteFrame.png */; };
 		11334A0517312A4200DB961F /* HudLayerSpriteFrame.plist in Resources */ = {isa = PBXBuildFile; fileRef = 11334A0317312A4200DB961F /* HudLayerSpriteFrame.plist */; };
 		11334A0617312A4200DB961F /* JebatSpriteFrame.plist in Resources */ = {isa = PBXBuildFile; fileRef = 11334A0417312A4200DB961F /* JebatSpriteFrame.plist */; };
+		11DF413C17364435006738A6 /* fiveStage.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 11DF413B17364435006738A6 /* fiveStage.tmx */; };
 		11F91B7317323A16006BD9C1 /* GLES-Render.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 11F91B7217323A16006BD9C1 /* GLES-Render.cpp */; };
 /* End PBXBuildFile section */
 
@@ -837,6 +838,7 @@
 		11334A0017312A3600DB961F /* JebatSpriteFrame.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = JebatSpriteFrame.png; path = handler/JebatSpriteFrame.png; sourceTree = "<group>"; };
 		11334A0317312A4200DB961F /* HudLayerSpriteFrame.plist */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; name = HudLayerSpriteFrame.plist; path = handler/HudLayerSpriteFrame.plist; sourceTree = "<group>"; };
 		11334A0417312A4200DB961F /* JebatSpriteFrame.plist */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; name = JebatSpriteFrame.plist; path = handler/JebatSpriteFrame.plist; sourceTree = "<group>"; };
+		11DF413B17364435006738A6 /* fiveStage.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = fiveStage.tmx; sourceTree = "<group>"; };
 		11F91B7117323A16006BD9C1 /* GLES-Render.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "GLES-Render.h"; sourceTree = "<group>"; };
 		11F91B7217323A16006BD9C1 /* GLES-Render.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "GLES-Render.cpp"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -917,6 +919,7 @@
 				113349DA173128B900DB961F /* Image44frame4.jpg */,
 				11237FFD173531FA00CD3E92 /* fivestage471.plist */,
 				113349DB173128B900DB961F /* fifth.tmx */,
+				11DF413B17364435006738A6 /* fiveStage.tmx */,
 				11237FF917352F8500CD3E92 /* fivestage.plist */,
 				113349DE173128CC00DB961F /* fifthlinePoints.plist */,
 				113346AD17311C2A00DB961F /* Icon-Small.png */,
@@ -2022,6 +2025,7 @@
 				11334A0617312A4200DB961F /* JebatSpriteFrame.plist in Resources */,
 				11237FFA17352F8500CD3E92 /* fivestage.plist in Resources */,
 				11237FFE173531FA00CD3E92 /* fivestage471.plist in Resources */,
+				11DF413C17364435006738A6 /* fiveStage.tmx in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

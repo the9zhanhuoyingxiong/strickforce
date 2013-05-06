@@ -56,6 +56,7 @@ public:
     void dorunning();
     void turnLeft();
     void turnRight();
+    
     void doStanding();
     void doJump();
 
@@ -65,6 +66,10 @@ private:
     int stayLineNumber;
 public:
     b2Body *amokBody;
+    bool isUp;
+    bool isDown;
+    bool isLeft;
+    bool isRight;
     
 };
 

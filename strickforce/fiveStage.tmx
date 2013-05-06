@@ -96,5 +96,8 @@
   <object x="22" y="640">
    <polyline points="0,0 5,-561"/>
   </object>
+  <object x="2519" y="781">
+   <polyline points="0,0 22,100"/>
+  </object>
  </objectgroup>
 </map>

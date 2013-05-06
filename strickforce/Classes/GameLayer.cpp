@@ -128,12 +128,13 @@ void GameLayer::initPlayer()
     
 
     b2PolygonShape playerShape ;
-    playerShape.SetAsBox(0.5f  ,0.4f);//pSize.height/12/PTM_RATIO);
+    playerShape.SetAsBox(0.5f  ,1.0f);//pSize.height/12/PTM_RATIO);
     playerBody->SetFixedRotation(true);
     
     b2FixtureDef fixtureDef ;
     fixtureDef.shape = &playerShape;
     fixtureDef.density = 0.0f;
+    fixtureDef.friction=2.0f;
     
     playerBody->CreateFixture(&fixtureDef);
     
@@ -194,7 +195,7 @@ void GameLayer::draw()
 
 void GameLayer::addGroundEdge()
 {
-    CCDictionary * lineDic = CCDictionary::createWithContentsOfFile("fivestage471.plist");
+    CCDictionary * lineDic = CCDictionary::createWithContentsOfFile("fivestage471.plist");//fivestage471
     lineDic->retain();
     CCTMXTiledMap *map = (CCTMXTiledMap *)getChildByTag(kTagBackground);
     CCPoint mPos = map->getPosition();
@@ -203,35 +204,37 @@ void GameLayer::addGroundEdge()
     for (int i = 0; i < lineDic->count(); i++)
     {
         CCDictionary *line = (CCDictionary *) lineDic->objectForKey(CCString::createWithFormat("%d",i)->getCString());//9   14
-        int x     = ((CCString *) line->objectForKey("x"))->intValue();
-        int y     = ((CCString *) line->objectForKey("y"))->intValue();
-        
-        //CCString *string = CCString::create("-1");
-        CCLOG("%s",((CCString *) line->objectForKey("height"))->getCString());
-        
-        float width = ((CCString *) line->objectForKey("width")) ->floatValue();
-        float height= ((CCString *) line->objectForKey("height"))->floatValue();
-//        CCLOG(" %d  %d %d %f %f ",i , x, y, width, height);
-        
-        CCPoint p = CCPoint(x, y);
-        CCPoint odd = CCPoint(width,-height);   //(100,0);//
-//        ccDrawLine(p, ccpAdd(p, odd));
-        b2BodyDef groundBodyDef;
-//        groundBodyDef.position.Set(0, 0);
-        
-        
-        b2Body* groundBody = world->CreateBody(&groundBodyDef);
-        b2EdgeShape groundBox;
-        
-        CCPoint FromLinePos = ccpAdd(p, mPos);
-        CCPoint ToLinePos = ccpAdd(ccpAdd(p, odd), mPos);        
-//        CCLOG("FromLinePos %f %f %f %f",FromLinePos.x,FromLinePos.y,ToLinePos.x,ToLinePos.y);
-        
-        groundBox.Set(b2Vec2(FromLinePos.x/PTM_RATIO,FromLinePos.y/PTM_RATIO), b2Vec2(ToLinePos.x/PTM_RATIO,ToLinePos.y/PTM_RATIO));
-        groundBody->CreateFixture(&groundBox,1);
-        
+        CCLOG("%d %d",i,lineDic->count());
+        if (line)
+        {
+            int x     = ((CCString *) line->objectForKey("x"))->intValue();
+            int y     = ((CCString *) line->objectForKey("y"))->intValue();
+            
+            float width = ((CCString *) line->objectForKey("width")) ->floatValue();
+            float height= ((CCString *) line->objectForKey("height"))->floatValue();
+            CCLOG("addGroundEdge %d  %d %d %f %f ",i , x, y, width, height);
+            
+            CCPoint p = CCPoint(x, y);
+            CCPoint odd = CCPoint(width,-height);   //(100,0);//
+            //        ccDrawLine(p, ccpAdd(p, odd));
+            b2BodyDef groundBodyDef;
+            //        groundBodyDef.position.Set(0, 0);
+            
+            
+            b2Body* groundBody = world->CreateBody(&groundBodyDef);
+            b2EdgeShape groundBox;
+            
+            CCPoint FromLinePos = ccpAdd(p, mPos);
+            CCPoint ToLinePos = ccpAdd(ccpAdd(p, odd), mPos);
+            //        CCLOG("FromLinePos %f %f %f %f",FromLinePos.x,FromLinePos.y,ToLinePos.x,ToLinePos.y);
+            
+            groundBox.Set(b2Vec2(FromLinePos.x/PTM_RATIO,FromLinePos.y/PTM_RATIO), b2Vec2(ToLinePos.x/PTM_RATIO,ToLinePos.y/PTM_RATIO));
+            groundBody->CreateFixture(&groundBox,1);
+
+        }
         
     }
+    lineDic->release();
 
 
 }
@@ -245,10 +248,12 @@ void GameLayer::addNewSpriteAtPosition(CCPoint p)
     b2Body *body = world->CreateBody(&bodyDef);
     
     b2PolygonShape dynamicBox;
-    dynamicBox.SetAsBox(.5f, .5f);
+    dynamicBox.SetAsBox(.5f, 2.0f);
     
     b2FixtureDef fixtureDef;
-    fixtureDef.shape = &dynamicBox;    
+    fixtureDef.shape = &dynamicBox;
+    fixtureDef.density = 10000.f;
+    
     fixtureDef.friction = 300.f;
     
     body->CreateFixture(&fixtureDef);

@@ -238,10 +238,13 @@ CCPoint CKSneaky::tilePosFromLocation(CCPoint location, CCTMXTiledMap *tileMap)
 
 void CKSneaky::handlerMoveVerticl()
 {
+    Amok_Jebat *player = GameLayer::sharedGameLayer()->aplayer;
+    
     
 }
 void CKSneaky::handlerMoveUp()
 {
+    
     
 }
 void CKSneaky::handlerMoveDown()

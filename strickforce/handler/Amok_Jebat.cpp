@@ -17,6 +17,10 @@ bool Amok_Jebat::init(tag_amok tag)
     }
     
     flag = tag;
+    isUp = false;
+    isDown = false;
+    isLeft = false;
+    isRight = false;
     
     CCSpriteFrameCache *frameCache = CCSpriteFrameCache::sharedSpriteFrameCache();
     frameCache->addSpriteFramesWithFile("JebatSpriteFrame.plist");
@@ -238,13 +242,15 @@ void Amok_Jebat::doStanding()
     {
         stopAllActions();
         runAction(createAnim(Amok_stand));
+        isUp = false;
     }
    
 }
 void Amok_Jebat::doJump()
 {
-    if (getFlag() != Amok_jump)
+    if (getFlag() != Amok_jump && !isUp)
     {
+        isUp = true;
         stopAllActions();
         runAction(createAnim(Amok_jump));
     }
