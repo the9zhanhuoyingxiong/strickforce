@@ -100,16 +100,18 @@ void fireLayer::draw()
     for (int i = 0; i < numObjects; i++)
     {
         CCDictionary *line = (CCDictionary *) lineDic->objectForKey(CCString::createWithFormat("%d",i)->getCString());//9   14
-        float x     = ((CCString *) line->objectForKey("x"))->floatValue();
-        float y     = ((CCString *) line->objectForKey("y"))->floatValue();
-        float width = ((CCString *) line->objectForKey("width")) ->floatValue();
-        float height= ((CCString *) line->objectForKey("height"))->floatValue();
-        CCSize  sizeback = map->getContentSize();
-        
-        CCPoint p = CCPoint(x, y);
-        CCPoint odd = CCPoint(width,-height);          
-        CCPoint thisPosition = ccpAdd(p, mapPos);
-        
+        if (line) {
+            float x     = ((CCString *) line->objectForKey("x"))->floatValue();
+            float y     = ((CCString *) line->objectForKey("y"))->floatValue();
+            float width = ((CCString *) line->objectForKey("width")) ->floatValue();
+            float height= ((CCString *) line->objectForKey("height"))->floatValue();
+            CCSize  sizeback = map->getContentSize();
+            
+            CCPoint p = CCPoint(x, y);
+            CCPoint odd = CCPoint(width,-height);
+            CCPoint thisPosition = ccpAdd(p, mapPos);
+
+        }
 //        draw(thisPosition, ccpAdd(thisPosition, odd));
         
         

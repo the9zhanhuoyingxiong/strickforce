@@ -14,6 +14,11 @@
 #include "Amok_Jebat.h"
 #include "fireLayer.h"
 #include "GLES-Render.h"
+#include "tags.h"
+
+
+
+#define scaleBackground 0.5f
 
 
 class PhysicsSprite : public cocos2d::CCSprite
@@ -31,21 +36,21 @@ class GameLayer : public cocos2d::CCLayer {
 public:
     ~GameLayer();
     GameLayer();
+    GameLayer(const char *tmxName,const char *plistName);
     
-    // returns a Scene that contains the HelloWorld as the only child
-    static cocos2d::CCScene* scene();
+    static cocos2d::CCScene* scene(stageTag tag);
     static GameLayer * sharedGameLayer();
     
     void initPhysics();
-    // adds a new sprite at a given coordinate
     void addNewSpriteAtPosition(cocos2d::CCPoint p);
 
     virtual void draw();
     virtual void ccTouchesBegan(cocos2d::CCSet *pTouches, cocos2d::CCEvent *pEvent);
     virtual void ccTouchesMoved(cocos2d::CCSet *pTouches, cocos2d::CCEvent *pEvent);
     virtual void ccTouchesEnded(cocos2d::CCSet *touches, cocos2d::CCEvent* event);
+    void menuCloseCallback(CCObject* pSender);
     void update(float dt);
-    void addGroundEdge();
+    void addGroundEdge(const char *plistName);
     void initPlayer();
     
     
@@ -54,7 +59,7 @@ public:
 private:
     GLESDebugDraw *m_debugDraw;
     b2World * world;
-    cocos2d::CCTexture2D* m_pSpriteTexture; // weak ref
+    cocos2d::CCTexture2D* m_pSpriteTexture; 
     
     cocos2d::CCPoint  touchstartPoint;
     cocos2d::CCPoint  touchendPoint;

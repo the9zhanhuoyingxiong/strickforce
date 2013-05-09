@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>3</key>
+	<dict>
+		<key>MODE</key>
+		<string>Team Deathmatch</string>
+		<key>name</key>
+		<string>Break In</string>
+		<key>Goal</key>
+		<string>KILLS TO WIN</string>
+		<key>num</key>
+		<string>30</string>
+		<key>MISSIONDESCRIPTION</key>
+		<string>The hero’s base is attacked by a mysterious \nforce,but why?</string>
+		<key>SPECIAL</key>
+		<string></string>
+		<key>smallPic</key>
+		<string>fourthSmall.jpg</string>
+	</dict>
+	<key>14</key>
+	<dict>
+		<key>name</key>
+		<string>Clean up</string>
+		<key>MODE</key>
+		<string>Team Deathmatch</string>
+		<key>Goal</key>
+		<string>KILLS TO WIN</string>
+		<key>num</key>
+		<string>30</string>
+		<key>MISSIONDESCRIPTION</key>
+		<string>Destroy all the remaining  clones in the Globex\n clone factory</string>
+		<key>SPECIAL</key>
+		<string></string>
+		<key>smallPic</key>
+		<string>secondSmall.jpg</string>
+	</dict>
+	<key>15</key>
+	<dict>
+		<key>name</key>
+		<string>Last hope</string>
+		<key>MODE</key>
+		<string>Team Deathmatch</string>
+		<key>Goal</key>
+		<string>KILLS TO WIN</string>
+		<key>num</key>
+		<string>30</string>
+		<key>MISSIONDESCRIPTION</key>
+		<string>This is your last chance to stop globex .The fate \nof the world rests in your hands.</string>
+		<key>SPECIAL</key>
+		<string></string>
+		<key>smallPic</key>
+		<string>eightSmall.jpg</string>
+	</dict>
+	<key>7</key>
+	<dict>
+		<key>name</key>
+		<string>Familiar Faces</string>
+		<key>MODE</key>
+		<string>Team Deathmatch</string>
+		<key>Goal</key>
+		<string>KILLS TO WIN</string>
+		<key>num</key>
+		<string>25</string>
+		<key>MISSIONDESCRIPTION</key>
+		<string>we’ve found the location of the globex base.\nSee what you can find</string>
+		<key>smallPic</key>
+		<string>secondSmall.jpg</string>
+	</dict>
+	<key>10</key>
+	<dict>
+		<key>name</key>
+		<string>GENE Therapy</string>
+		<key>MODE</key>
+		<string>Team Deathmatch</string>
+		<key>Goal</key>
+		<string>KILLS TO WIN</string>
+		<key>num</key>
+		<string>14</string>
+		<key>MISSIONDESCRIPTION</key>
+		<string>We’re reached lagi’s home,but we arrive \nbefore dex?</string>
+		<key>SPECIAL</key>
+		<string></string>
+		<key>smallPic</key>
+		<string>fifthSmall.jpg</string>
+	</dict>
+	<key>2</key>
+	<dict>
+		<key>name</key>
+		<string>New Recruit</string>
+		<key>MODE</key>
+		<string>Deathmatch</string>
+		<key>Goal</key>
+		<string>KILLS TO WIN</string>
+		<key>num</key>
+		<string>15</string>
+		<key>MISSIONDESCRIPTION</key>
+		<string>As a new recruit , you  must prove yourself to \nthe Heros. Will they  accept you?</string>
+		<key>SPECIAL</key>
+		<string></string>
+		<key>smallPic</key>
+		<string>fourthSmall.jpg</string>
+	</dict>
+	<key>5</key>
+	<dict>
+		<key>name</key>
+		<string>Outsider Help</string>
+		<key>MODE</key>
+		<string>Domination</string>
+		<key>Goal</key>
+		<string>POINTS TO WIN</string>
+		<key>num</key>
+		<string>75</string>
+		<key>MISSIONDESCRIPTION</key>
+		<string>World famous DNA scientist lagi might have\n some info about the clones .contact him at his\n home</string>
+		<key>SPECIAL</key>
+		<string></string>
+		<key>smallPic</key>
+		<string>fifthSmall.jpg</string>
+	</dict>
+	<key>13</key>
+	<dict>
+		<key>name</key>
+		<string>Reprogram</string>
+		<key>MODE</key>
+		<string>Domination</string>
+		<key>Goal</key>
+		<string>POINTS TO WIN</string>
+		<key>num</key>
+		<string>100</string>
+		<key>MISSIONDESCRIPTION</key>
+		<string>Upload a virus  to the space station to stop\n global clone control</string>
+		<key>SPECIAL</key>
+		<string>Character: Mick ，the ASstronaut</string>
+		<key>smallPic</key>
+		<string>firstSmall.jpg</string>
+	</dict>
+	<key>4</key>
+	<dict>
+		<key>name</key>
+		<string>Reunion</string>
+		<key>MODE</key>
+		<string>Team Deathmatch</string>
+		<key>Goal</key>
+		<string>KILLS TO WIN</string>
+		<key>num</key>
+		<string>20</string>
+		<key>MISSIONDESCRIPTION</key>
+		<string>Meet up with the scientist to see what he\n knows about globex</string>
+		<key>SPECIAL</key>
+		<string></string>
+		<key>smallPic</key>
+		<string>sevenSmall.jpg</string>
+	</dict>
+	<key>11</key>
+	<dict>
+		<key>name</key>
+		<string>Revisiting</string>
+		<key>MODE</key>
+		<string>Deathmatch</string>
+		<key>Goal</key>
+		<string>POINTS TO WIN</string>
+		<key>num</key>
+		<string>100</string>
+		<key>MISSIONDESCRIPTION</key>
+		<string>With lagi gone, no one knows the clones better \n than the scientist. Unfortunately</string>
+		<key>SPECIAL</key>
+		<string></string>
+		<key>smallPic</key>
+		<string>sevenSmall.jpg</string>
+	</dict>
+	<key>12</key>
+	<dict>
+		<key>name</key>
+		<string>Sabotage</string>
+		<key>MODE</key>
+		<string>Capture the Flag</string>
+		<key>Goal</key>
+		<string>FLAGS TO WIN</string>
+		<key>num</key>
+		<string>5</string>
+		<key>MISSIONDESCRIPTION</key>
+		<string>Gather globex  intel to find out more about the\n clones, and how to stop them</string>
+		<key>SPECIAL</key>
+		<string></string>
+		<key>smallPic</key>
+		<string>secondSmall.jpg</string>
+	</dict>
+	<key>1</key>
+	<dict>
+		<key>name</key>
+		<string>Station Repair</string>
+		<key>MODE</key>
+		<string>Team Deathmatch</string>
+		<key>Goal</key>
+		<string>KILLS TO WIN</string>
+		<key>num</key>
+		<string>25</string>
+		<key>MISSIONDESCRIPTION</key>
+		<string>A routine repair of Space Station SS01A is cut short \\n by some unwell guests.</string>
+		<key>SPECIAL</key>
+		<string></string>
+		<key>smallPic</key>
+		<string>firstSmall.jpg</string>
+	</dict>
+	<key>8</key>
+	<dict>
+		<key>name</key>
+		<string>The Call</string>
+		<key>MODE</key>
+		<string>Team Deathmatch</string>
+		<key>Goal</key>
+		<string>KILLS TO WIN</string>
+		<key>num</key>
+		<string>30</string>
+		<key>MISSIONDESCRIPTION</key>
+		<string>We’ve received the call from lagi, the antidote\n is complete</string>
+		<key>SPECIAL</key>
+		<string></string>
+		<key>smallPic</key>
+		<string>fourthSmall.jpg</string>
+	</dict>
+	<key>9</key>
+	<dict>
+		<key>name</key>
+		<string>Time is Money</string>
+		<key>MODE</key>
+		<string>Deathmatch</string>
+		<key>Goal</key>
+		<string>POINTS TO WIN</string>
+		<key>num</key>
+		<string>100</string>
+		<key>MISSIONDESCRIPTION</key>
+		<string>Dex is racing to lagi ,we must get there before\n he does!</string>
+		<key>SPECIAL</key>
+		<string></string>
+		<key>smallPic</key>
+		<string>thirdSmall.jpg</string>
+	</dict>
+	<key>6</key>
+	<dict>
+		<key>name</key>
+		<string>What&apos;s yours is mine</string>
+		<key>MODE</key>
+		<string>Capture the Flag</string>
+		<key>Goal</key>
+		<string>FLAGS TO WIN</string>
+		<key>num</key>
+		<string>3</string>
+		<key>MISSIONDESCRIPTION</key>
+		<string>We could use a convoy to deal with the clones.\nGlobex has one,steal it.</string>
+		<key>SPECIAL</key>
+		<string></string>
+		<key>smallPic</key>
+		<string>thirdSmall.jpg</string>
+	</dict>
+</dict>
+</plist>

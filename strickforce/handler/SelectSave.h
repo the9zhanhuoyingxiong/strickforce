@@ -18,7 +18,7 @@ public:
     virtual bool init();    
     static cocos2d::CCScene* scene();
     void menuCloseCallback(CCObject* pSender);
-    void addSelectColumn();
+    
     CREATE_FUNC(SelectSave);
 };
 

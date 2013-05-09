@@ -25,6 +25,8 @@ bool Amok_Jebat::init(tag_amok tag)
     CCSpriteFrameCache *frameCache = CCSpriteFrameCache::sharedSpriteFrameCache();
     frameCache->addSpriteFramesWithFile("JebatSpriteFrame.plist");
     
+    setScale(0.7f);
+    
     CCRepeat *rep = this->createAnim(tag);
      this->initWithSpriteFrameName(string->getCString());
     

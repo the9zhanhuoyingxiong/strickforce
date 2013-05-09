@@ -9,8 +9,8 @@
 #include "Handler.h"
 using namespace cocos2d;
 #include "Amok_Jebat.h"
-#include "fireLayer.h"
 #include "GameLayer.h"
+#include "fireLayer.h"
 
 
 
@@ -34,6 +34,7 @@ bool CKSneaky::init(){
     if (!CCLayer::init()) {
         return false;
     }
+    isUp = false;
 
     
     CCSize size = CCDirector::sharedDirector()->getWinSize();
@@ -96,7 +97,7 @@ void CKSneaky::addJoystick(){
     joystick->initWithRect(CCRect(0, 0, 10, 10));
     joystick->setAutoCenter(true);
     joystick->setIsDPad(true);
-    joystick->setNumberOfDirections(4);
+    joystick->setNumberOfDirections(8);
     joystick->setDeadRadius(10);
     joystick->setThumbRadius(10);
     joystick->setJoystickRadius(10);
@@ -141,85 +142,89 @@ void CKSneaky::update(float dt)
 {
     CCPoint velocity = ccpMult(joystick->getVelocity(), 2);
     Amok_Jebat *player = GameLayer::sharedGameLayer()->aplayer;
-//    player->release();
     int xs = velocity.x;
     int ys = velocity.y;
-    if(xs != 0 )//&& velocity.y != 0)
+    if(xs != 0 )
     {
         
+        player->cocos2d::CCNode::setPosition(player->getPositionX() + velocity.x, player->getPositionY());        
+        player->dorunning();
         
-//        b2Body *body = player->amokBody;
-//        body->ApplyForceToCenter(b2Vec2(xs*10,ys*10));
-//        player->cocos2d::CCNode::setPosition(player->getPositionX() + velocity.x, player->getPositionY());
-//        player->dorunning();
-//        
         if( xs < 0 )
         {
-            player->amokBody->ApplyForceToCenter(b2Vec2(-100,0));
+            player->amokBody->ApplyForceToCenter(b2Vec2(-10,0));
             player->turnLeft();
         }
         if (xs > 0 )
         {
-            player->amokBody->ApplyForceToCenter(b2Vec2(100,0));
+            player->amokBody->ApplyForceToCenter(b2Vec2(10,0));
+
             player->turnRight();            
         }
     }
     else if (xs == 0 && ys == 0)
     {
         player->doStanding();
+        isUp = false;
+        
     }
     else if (ys > 0)
     {
-        player->doJump();
-        player->amokBody->ApplyForceToCenter(b2Vec2(0,200));
+        
+        if (!isUp) {
+            player->amokBody->ApplyForceToCenter(b2Vec2(0,400));
+            player->doJump();
+            isUp = true;
+            
+        }        
     }
+    
+        
+    totalTime += dt;
+    
+    
+    
+    if (jump->getIsActive()&& totalTime > nextFireTime ) {
+        nextFireTime += 0.5;
+        player->stopAllActions();
+        if (player->getFlag() != Amok_run)
+        {
+            CCRepeat *rep =  player->createAnim(Amok_jump);
+            CCRepeat *re  = player->createAnim(Amok_stand);
+            CCSequence *seq = (CCSequence *)CCSequence::create(rep,re,NULL);
+            
+            player->runAction(seq);
+        }
+        
+    }
+    
+    if (fire->getIsActive()&& totalTime > nextFireTime ) {
+        nextFireTime += 0.5;
+        player->stopAllActions();
+        if (player->getFlag() != Amok_run)
+        {
+            CCRepeat *rep =  player->createAnim(Amok_attack1);
+            CCRepeat *re  = player->createAnim(Amok_stand);
+            CCSequence *seq = (CCSequence *)CCSequence::create(rep,re,NULL);            
+            player->runAction(seq);
+        }
+        
+    }
+    //
+    if (!fire->getIsActive()) {
+        nextFireTime = 0;
+        totalTime = 0;
+        //  CCLOG("!getIsActive");
+        
+    }
+
+    
 //
-//        
-//    totalTime += dt;
-//    
-//    
-//    
-//    if (jump->getIsActive()&& totalTime > nextFireTime ) {
-//        nextFireTime += 0.5;
-//        player->stopAllActions();
-//        if (player->getFlag() != Amok_run)
-//        {
-//            CCRepeat *rep =  player->createAnim(Amok_jump);
-//            CCRepeat *re  = player->createAnim(Amok_stand);
-//            CCSequence *seq = (CCSequence *)CCSequence::create(rep,re,NULL);
-//            
-//            player->runAction(seq);
-//        }
-//        
-//    }
-//    
-//    if (fire->getIsActive()&& totalTime > nextFireTime ) {
-//        nextFireTime += 0.5;
-//        player->stopAllActions();
-//        if (player->getFlag() != Amok_run)
-//        {
-//            CCRepeat *rep =  player->createAnim(Amok_attack1);
-//            CCRepeat *re  = player->createAnim(Amok_stand);
-//            CCSequence *seq = (CCSequence *)CCSequence::create(rep,re,NULL);            
-//            player->runAction(seq);
-//        }
-//        
-//    }
-//    //
-//    if (!fire->getIsActive()) {
-//        nextFireTime = 0;
-//        totalTime = 0;
-//        //  CCLOG("!getIsActive");
-//        
-//    }
-//
-//    
-////
-//    if (!jump->getIsActive()) {
-//        nextFireTime = 0;
-//        totalTime = 0;
-//      //  CCLOG("!getIsActive");        
-//    }
+    if (!jump->getIsActive()) {
+        nextFireTime = 0;
+        totalTime = 0;
+      //  CCLOG("!getIsActive");        
+    }
 }
 
 CCPoint CKSneaky::tilePosFromLocation(CCPoint location, CCTMXTiledMap *tileMap)
@@ -238,13 +243,10 @@ CCPoint CKSneaky::tilePosFromLocation(CCPoint location, CCTMXTiledMap *tileMap)
 
 void CKSneaky::handlerMoveVerticl()
 {
-    Amok_Jebat *player = GameLayer::sharedGameLayer()->aplayer;
-    
     
 }
 void CKSneaky::handlerMoveUp()
 {
-    
     
 }
 void CKSneaky::handlerMoveDown()

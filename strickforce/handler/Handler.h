@@ -18,7 +18,7 @@ class CKSneaky : public cocos2d::CCLayer{
     SneakyJoystickSkinnedBase *joystickBase;
     SneakyJoystick *joystick;
     
-    SneakyButtonSkinnedBase *fireButtonBase,jumpButtonBase;
+    SneakyButtonSkinnedBase fireButtonBase,jumpButtonBase;
     SneakyButton *fire, *jump;
     
     float totalTime, nextFireTime;
@@ -38,6 +38,9 @@ public:
     void handlerMoveDown();
     
     CREATE_FUNC(CKSneaky);
+
+
+bool isUp;
 };
 
 #endif /* defined(__Cocos2d_x_402_Plane__CKSneaky__) */

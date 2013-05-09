@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="88" height="60" tilewidth="32" tileheight="32">
+ <layer name="块层 1" width="88" height="60">
+  <data encoding="base64" compression="zlib">
+   eJztwQENAAAAwqD3T20PBxQAAAAAAAAAAAAAAAAAAAAAAAAAAM8GUoAAAQ==
+  </data>
+ </layer>
+</map>

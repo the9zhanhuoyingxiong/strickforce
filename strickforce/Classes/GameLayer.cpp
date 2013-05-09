@@ -10,6 +10,7 @@
 #include "Handler.h"
 #include "Amok_Jebat.h"
 #include "fireLayer.h"
+#include "Campaign.h"
 
 using namespace cocos2d;
 using namespace CocosDenshion;
@@ -26,6 +27,7 @@ enum {
 
 PhysicsSprite::PhysicsSprite()
 : m_pBody(NULL)
+
 {
 
 }
@@ -81,23 +83,39 @@ GameLayer * GameLayer::sharedGameLayer()
 
 GameLayer::GameLayer()
 {
+//     new GameLayer("firstStage.tmx","firstStage.plist");
+    
+}
+
+GameLayer::GameLayer(const char  *tmxName,const char *plistName)
+{    
     setTouchEnabled( true );
     setAccelerometerEnabled( true );
     bGameLayer = this;
-    CCTMXTiledMap *map = CCTMXTiledMap::create("fifth.tmx");
+    CCTMXTiledMap *map = CCTMXTiledMap::create(tmxName);
+    
+    map->setScale(scaleBackground);
     CCSize mSize = map->getContentSize();
-    this->addChild(map,-10,kTagBackground);
-    map->setPosition(ccp(-mSize.width/3,-mSize.height/3));
-    CCLOG("mSize  %f %f    ",-mSize.width/3,-mSize.height/3);
-//    map->setVisible(false);
+    addChild(map,-10,kTagBackground);
+    map->setPosition(ccp(-mSize.width/3*scaleBackground,-mSize.height/3*scaleBackground));
     
     CKSneaky *stick = CKSneaky::create();
-    this->addChild(stick,10,kTagHandler);
-    this->setPosition(CCPointZero);
 
-
+    addChild(stick,10,kTagHandler);
+    setPosition(CCPointZero);
+        
     initPhysics();
-    initPlayer();
+    initPlayer();    
+    
+    CCMenuItemFont *back = CCMenuItemFont::create("back",this,menu_selector(GameLayer::menuCloseCallback));    
+    CCMenu *menu = CCMenu::create(back,NULL);
+    CCSize sizeWin = CCDirector::sharedDirector()->getWinSize();
+    CCSize sizeBack= menu->getContentSize();
+    menu->setPosition(ccp(sizeWin.width-50  ,sizeWin.height-25));
+    addChild(menu);
+    
+     addGroundEdge(plistName);
+           
     scheduleUpdate();
 }
 
@@ -115,26 +133,22 @@ GameLayer::~GameLayer()
 void GameLayer::initPlayer()
 {
     aplayer = Amok_Jebat::create(Amok_stand);
-    aplayer->retain();
-    addChild(aplayer);    
+    addChild(aplayer);
     
     b2BodyDef playerBodyDef;
     playerBodyDef.type = b2_dynamicBody;
     playerBodyDef.position.Set(100.f/PTM_RATIO, 180.f/PTM_RATIO);
     
-
     b2Body* playerBody = world->CreateBody(&playerBodyDef);
-    
-    
 
     b2PolygonShape playerShape ;
-    playerShape.SetAsBox(0.5f  ,1.0f);//pSize.height/12/PTM_RATIO);
+    playerShape.SetAsBox(0.25f  ,0.5f);//pSize.height/12/PTM_RATIO);
     playerBody->SetFixedRotation(true);
     
     b2FixtureDef fixtureDef ;
     fixtureDef.shape = &playerShape;
-    fixtureDef.density = 0.0f;
-    fixtureDef.friction=2.0f;
+    fixtureDef.density =2.0f;
+    fixtureDef.friction=2.50f;
     
     playerBody->CreateFixture(&fixtureDef);
     
@@ -170,16 +184,14 @@ void GameLayer::initPhysics()
     //        flags += b2Draw::e_pairBit;
     //        flags += b2Draw::e_centerOfMassBit;
     m_debugDraw->SetFlags(flags);
-//    CCDelayTime
 
-    addGroundEdge();
+   
         
    }
 
 void GameLayer::draw()
 {
     // IMPORTANT:    // This is only for debug purposes    // It is recommend to disable it    //
-//    CCLOG("draw");
     CCLayer::draw();
 
     ccGLEnableVertexAttribs( kCCVertexAttribFlag_Position );
@@ -189,34 +201,34 @@ void GameLayer::draw()
     world->DrawDebugData();
 
     kmGLPopMatrix();
-    
    
 }
 
-void GameLayer::addGroundEdge()
+void GameLayer::addGroundEdge(const char *plistName)
 {
-    CCDictionary * lineDic = CCDictionary::createWithContentsOfFile("fivestage471.plist");//fivestage471
+    CCDictionary * lineDic = CCDictionary::createWithContentsOfFile(plistName);//fivestage471
     lineDic->retain();
     CCTMXTiledMap *map = (CCTMXTiledMap *)getChildByTag(kTagBackground);
     CCPoint mPos = map->getPosition();
-    CCLOG("%f %f",mPos.x,mPos.y);
     
     for (int i = 0; i < lineDic->count(); i++)
     {
-        CCDictionary *line = (CCDictionary *) lineDic->objectForKey(CCString::createWithFormat("%d",i)->getCString());//9   14
-        CCLOG("%d %d",i,lineDic->count());
+        CCDictionary *line = (CCDictionary *) lineDic->objectForKey(CCString::createWithFormat("%d",i)->getCString());
         if (line)
         {
-            int x     = ((CCString *) line->objectForKey("x"))->intValue();
-            int y     = ((CCString *) line->objectForKey("y"))->intValue();
+            float x     = ((CCString *) line->objectForKey("x"))->floatValue();
+            float y     = ((CCString *) line->objectForKey("y"))->floatValue();
             
             float width = ((CCString *) line->objectForKey("width")) ->floatValue();
             float height= ((CCString *) line->objectForKey("height"))->floatValue();
-            CCLOG("addGroundEdge %d  %d %d %f %f ",i , x, y, width, height);
             
-            CCPoint p = CCPoint(x, y);
-            CCPoint odd = CCPoint(width,-height);   //(100,0);//
-            //        ccDrawLine(p, ccpAdd(p, odd));
+//            CCLOG("%f %f %f %f",x,y,width,height);
+            
+            CCPoint p = ccpMult(CCPoint(x, y), 0.5f) ;
+            CCPoint odd = ccpMult(CCPoint(width,-height), 0.5f) ;
+//            ccDrawLine(p, ccpAdd(p,ccp(100, 0)));
+
+//            ccDrawLine(p, ccpAdd(p, odd));
             b2BodyDef groundBodyDef;
             //        groundBodyDef.position.Set(0, 0);
             
@@ -235,8 +247,6 @@ void GameLayer::addGroundEdge()
         
     }
     lineDic->release();
-
-
 }
 
 void GameLayer::addNewSpriteAtPosition(CCPoint p)
@@ -277,8 +287,7 @@ void GameLayer::update(float dt)
     }
 }
 
-void GameLayer::ccTouchesEnded(CCSet*
-                                touches, CCEvent* event)
+void GameLayer::ccTouchesEnded(CCSet* touches, CCEvent* event)
 {
     CCSetIterator it;
     CCTouch* touch;
@@ -294,15 +303,21 @@ void GameLayer::ccTouchesEnded(CCSet*
         
         location = CCDirector::sharedDirector()->convertToGL(location);
                 
-//        addNewSpriteAtPosition(ccpSub(location, getPosition()));//ccpSub(location, getPosition())
     }
 }
 
-CCScene* GameLayer::scene()
+CCScene* GameLayer::scene(stageTag tag)
 {
     CCScene *scene = CCScene::create();
+    CCString *num = CCString::createWithFormat("%d",  (int)tag+1);
+    CCLOG("%d",num);
+    CCDictionary *stageDic = CCDictionary::createWithContentsOfFile("StageTmxPlist.plist");
+    CCDictionary *stageNum = (CCDictionary *)stageDic->objectForKey(num->getCString());
+
+    CCString *tmxName = (CCString *)stageNum->objectForKey("tmxName");
+    CCString *plistName= (CCString *)stageNum->objectForKey("plistName");
     
-    CCLayer* layer = new GameLayer();
+    CCLayer* layer = new GameLayer(tmxName->getCString(),plistName->getCString());
     scene->addChild(layer);
     layer->release();
 
@@ -317,7 +332,6 @@ void GameLayer::ccTouchesBegan(CCSet *pTouches, CCEvent *pEvent)
     CCTouch* touch = (CCTouch*)(*it);
     
     touchstartPoint = touch->getLocation();
-//    //    CCLOG("touchstartPoint %f %f",touchstartPoint.x,touchstartPoint.y);
 }
 
 
@@ -355,5 +369,10 @@ void GameLayer::ccTouchesMoved(CCSet *pTouches, CCEvent *pEvent)
     }
 
     
+}
+
+void GameLayer::menuCloseCallback(CCObject *pSender)
+{
+    CCDirector::sharedDirector()->replaceScene(Campaign::scene());
 }
 
